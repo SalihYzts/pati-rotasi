@@ -1,25 +1,73 @@
 {
   "expo": {
-    "name": "pati-rotasi",
+    "name": "Pati Rotası",
     "slug": "pati-rotasi",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.patirotasi.app"
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#DE7046",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.patirotasi.app",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "ACTIVITY_RECOGNITION",
+        "CAMERA"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-status-bar",
+      "expo-audio",
+      "expo-image",
+      "expo-font",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Kedi fotoğraflarını koleksiyonuna eklemek için galerine erişiyoruz.",
+          "cameraPermission": "Sokaktaki kedilerin fotoğrafını çekmek için kamerana erişiyoruz."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Yürüdükçe haritadaki sisi kaldırmak ve kedileri mahallene eklemek için konumunu kullanıyoruz."
+        }
+      ],
+      [
+        "expo-sensors",
+        {
+          "motionPermission": "Adımlarını sayıp mama puanına çevirmek için hareket verisini kullanıyoruz."
+        }
+      ],
+      "expo-asset",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 220,
+          "resizeMode": "contain",
+          "backgroundColor": "#FFF4E6"
+        }
+      ]
+    ],
+    "scheme": "patirotasi",
+    "experiments": {
+      "typedRoutes": true
     }
   }
 }
