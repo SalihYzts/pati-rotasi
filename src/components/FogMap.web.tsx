@@ -32,6 +32,8 @@ export default function FogMap({ data, onCatPress }: FogMapProps) {
     ref,
     srcDoc: FOG_MAP_HTML,
     title: 'Sisli harita',
+    // Harita belgesi uygulamanın kökenine (localStorage vb.) erişemesin.
+    sandbox: 'allow-scripts',
     style: { position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0 },
   });
 }

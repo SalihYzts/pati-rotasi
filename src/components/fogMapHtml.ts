@@ -130,14 +130,21 @@ export const FOG_MAP_HTML = `<!doctype html>
     if (d.track.length > 1) trackLine = L.polyline(d.track, { color:'#E8743B', weight:4, opacity:.85, dashArray:'2 8', lineCap:'round' }).addTo(map);
     catLayer.clearLayers();
     d.cats.forEach(function(cat){
-      var m = L.marker([cat.lat, cat.lng], { icon: L.divIcon({ className:'', html:'<div class="cat" style="background:'+cat.color+'">🐾</div>', iconSize:[30,30], iconAnchor:[15,15] }) });
+      // Rengi HTML metnine gömmüyoruz; doğrulayıp DOM üzerinden veriyoruz.
+      var el = document.createElement('div');
+      el.className = 'cat';
+      el.textContent = '🐾';
+      if (/^#[0-9A-Fa-f]{6}$/.test(cat.color)) el.style.background = cat.color;
+      var m = L.marker([+cat.lat, +cat.lng], { icon: L.divIcon({ className:'', html: el, iconSize:[30,30], iconAnchor:[15,15] }) });
       m.on('click', function(){ send({ type:'cat', id: cat.id }); });
       catLayer.addLayer(m);
     });
     draw();
   };
 
+  // Web'de yalnızca bizi gömen uygulamadan gelen mesajları kabul et.
   window.addEventListener('message', function(e){
+    if (e.source !== window.parent) return;
     try { var d = typeof e.data === 'string' ? JSON.parse(e.data) : e.data; if (d && d.type === 'update') window.patiUpdate(d.data); } catch(_){}
   });
 
